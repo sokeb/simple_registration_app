@@ -42,17 +42,23 @@ class RegistrationViewState extends State<RegistrationView> {
 
                     TextFormField(
                       controller: nameController,
+                      validator: (v) =>
+                      v!.isEmpty ? 'Enter name' : null,
                       decoration: const InputDecoration(labelText: 'Name'),
                     ),
 
                     TextFormField(
                       controller: emailController,
+                      validator: (v) =>
+                      v!.contains('@') ? null : 'Invalid email',
                       decoration: const InputDecoration(labelText: 'Email'),
                     ),
 
                     TextFormField(
                       controller: passController,
                       obscureText: obscurePassword,
+                      validator: (v) =>
+                      v!.length < 6 ? 'Min 6 chars' : null,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         suffixIcon: IconButton(
@@ -71,7 +77,9 @@ class RegistrationViewState extends State<RegistrationView> {
                     const SizedBox(height: 20),
 
                      ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {}
+                      },
                       child: const Text('Register'),
                     )
                   ],
