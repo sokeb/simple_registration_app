@@ -1,88 +1,91 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_registration_app/features/auth/widgets/widgets.dart';
 
-class RegistrationView extends StatefulWidget {
-  const RegistrationView({super.key});
-
-  @override
-  RegistrationViewState createState() => RegistrationViewState();
-}
-
-class RegistrationViewState extends State<RegistrationView> {
-  final _formKey = GlobalKey<FormState>();
+class RegistrationView extends StatelessWidget {
+  RegistrationView({super.key});
 
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passController = TextEditingController();
 
-  bool obscurePassword = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const .all(20),
+      body: Background(
         child: Center(
           child: SingleChildScrollView(
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 500),
-              padding: const .all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-                boxShadow:const [BoxShadow(blurRadius: 10)],
-              ),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    const Text('Register',
-                        style: TextStyle(fontSize: 24)),
-
-                    const SizedBox(height: 20),
-
-                    TextFormField(
-                      controller: nameController,
-                      validator: (v) =>
-                      v!.isEmpty ? 'Enter name' : null,
-                      decoration: const InputDecoration(labelText: 'Name'),
-                    ),
-
-                    TextFormField(
-                      controller: emailController,
-                      validator: (v) =>
-                      v!.contains('@') ? null : 'Invalid email',
-                      decoration: const InputDecoration(labelText: 'Email'),
-                    ),
-
-                    TextFormField(
-                      controller: passController,
-                      obscureText: obscurePassword,
-                      validator: (v) =>
-                      v!.length < 6 ? 'Min 6 chars' : null,
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        suffixIcon: IconButton(
-                          icon: Icon(obscurePassword
-                              ? Icons.visibility
-                              : Icons.visibility_off),
-                          onPressed: () {
-                            setState(() {
-                              obscurePassword = !obscurePassword;
-                            });
-                          },
+            child: FadeInUp(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: GlassCard(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      FadeInDown(
+                        child: const Text(
+                          'Create Account',
+                          style: TextStyle(
+                            fontSize: 26,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
 
-                    const SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
-                     ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
-                      },
-                      child: const Text('Register'),
-                    )
-                  ],
+                      AnimatedTextField(
+                        hint: 'Name',
+                        controller: nameController,
+                      ),
+                      AnimatedTextField(
+                        hint: 'Email',
+                        controller: emailController,
+                      ),
+                      AnimatedTextField(
+                        hint: 'Password',
+                        controller: passController,
+                        isPassword: true,
+                      ),
+
+                      const SizedBox(height: 20),
+
+                      InkWell(
+                        onTap: () {
+                          // call bloc here
+                        },
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 300),
+                          height: 50,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: const Color(0xFF092327)),
+                            borderRadius: BorderRadius.circular(15),
+                            gradient: const LinearGradient(
+                              colors: [
+                                Color(0xFF0b5351),
+                                Color(0xFF00a9a5),
+                                Color(0xFF0b5351),
+                              ],
+                            ),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Register',
+                              style: TextStyle(
+                                color: Color(0xFF092327),
+                                fontSize: 20,
+                                fontWeight: .bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      const SizedBox(height: 20),
+                    ],
+                  ),
                 ),
               ),
             ),
