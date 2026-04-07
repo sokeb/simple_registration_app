@@ -6,11 +6,13 @@ class AnimatedTextField extends StatefulWidget {
     required this.controller,
     super.key,
     this.isPassword = false,
+    this.validator,
   });
 
   final String hint;
   final TextEditingController controller;
   final bool isPassword;
+  final String? Function(String?)? validator;
 
   @override
   State<AnimatedTextField> createState() => _AnimatedTextFieldState();
@@ -36,8 +38,10 @@ class _AnimatedTextFieldState extends State<AnimatedTextField> {
             width: 2,
           ),
         ),
-        child: TextField(
+        child: TextFormField(
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           controller: widget.controller,
+          validator: widget.validator,
           obscureText: widget.isPassword && obscure,
           style: const TextStyle(color: Colors.white, fontSize: 18),
           decoration: InputDecoration(
