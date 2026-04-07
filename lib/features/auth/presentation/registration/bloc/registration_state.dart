@@ -4,7 +4,7 @@ enum RegistrationStatus { initial, loading, success, failure }
 
 final class RegistrationState extends Equatable {
   const RegistrationState({
-    this.status = RegistrationStatus.loading,
+    this.status = RegistrationStatus.initial,
     this.statusMsg = '',
   });
 

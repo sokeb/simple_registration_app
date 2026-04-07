@@ -9,20 +9,14 @@ sealed class RegistrationEvent extends Equatable {
 
 final class OnRegistration extends RegistrationEvent {
   const OnRegistration({
-    required this.name,
-    required this.email,
-    required this.password,
+    required this.user,
   });
 
-  final String name;
-  final String email;
-  final String password;
+  final UserModel user;
 
   @override
-  List<Object> get props => [name, email, password];
-
+  List<Object> get props => [user];
 }
-
 
 final class RegisterError extends RegistrationEvent {
   const RegisterError(this.message);
