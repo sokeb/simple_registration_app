@@ -15,7 +15,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   http: ^1.6.0
   intl: ^0.20.2
-  animate_do: ^4.2.0
+  animate_do: ^5.1.0
   flutter_localizations:
     sdk: flutter
 
